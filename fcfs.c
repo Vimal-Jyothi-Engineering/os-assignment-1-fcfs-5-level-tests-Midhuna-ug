@@ -37,20 +37,20 @@ int main() {
         cur += bt[i];
     }
 
-    // STEP 3: Sort back by PID for correct printing order
-    for (int i = 0; i < n - 1; i++) {
-        for (int j = 0; j < n - i - 1; j++) {
-            if (pid[j] > pid[j + 1]) {
-                int t;
-                t = pid[j]; pid[j] = pid[j + 1]; pid[j + 1] = t;
-                t = at[j]; at[j] = at[j + 1]; at[j + 1] = t;
-                t = bt[j]; bt[j] = bt[j + 1]; bt[j + 1] = t;
-                t = wt[j]; wt[j] = wt[j + 1]; wt[j + 1] = t;
-                t = tat[j]; tat[j] = tat[j + 1]; tat[j + 1] = t;
-            }
+  // STEP 3: Sort back by PID for printing
+for (int i = 0; i < n - 1; i++) {
+    for (int j = 0; j < n - i - 1; j++) {
+        if (pid[j] > pid[j + 1]) {
+
+            int t;
+            t = pid[j]; pid[j] = pid[j + 1]; pid[j + 1] = t;
+            t = at[j];  at[j] = at[j + 1];  at[j + 1] = t;
+            t = bt[j];  bt[j] = bt[j + 1];  bt[j + 1] = t;
+            t = wt[j];  wt[j] = wt[j + 1];  wt[j + 1] = t;
+            t = tat[j]; tat[j] = tat[j + 1]; tat[j + 1] = t;
         }
     }
-
+}
     double avgWT = 0, avgTAT = 0;
     for (int i = 0; i < n; i++) {
         avgWT += wt[i];
@@ -73,4 +73,5 @@ int main() {
 
     return 0;
 }
+
 
