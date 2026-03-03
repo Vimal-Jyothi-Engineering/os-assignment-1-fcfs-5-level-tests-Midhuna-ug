@@ -14,15 +14,19 @@ int main() {
         pid[i] = atoi(pname + 1);
     }
 
-    for (int i = 0; i < n - 1; i++)
-        for (int j = 0; j < n - i - 1; j++)
+    // STEP 1: Sort by arrival time
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
             if (at[j] > at[j + 1]) {
                 int t;
-                t = at[j];  at[j] = at[j+1];  at[j+1] = t;
-                t = bt[j];  bt[j] = bt[j+1];  bt[j+1] = t;
-                t = pid[j]; pid[j] = pid[j+1]; pid[j+1] = t;
+                t = at[j]; at[j] = at[j + 1]; at[j + 1] = t;
+                t = bt[j]; bt[j] = bt[j + 1]; bt[j + 1] = t;
+                t = pid[j]; pid[j] = pid[j + 1]; pid[j + 1] = t;
             }
+        }
+    }
 
+    // STEP 2: FCFS calculation
     int cur = 0;
     for (int i = 0; i < n; i++) {
         if (cur < at[i])
@@ -31,6 +35,20 @@ int main() {
         wt[i] = cur - at[i];
         tat[i] = wt[i] + bt[i];
         cur += bt[i];
+    }
+
+    // STEP 3: Sort back by PID for correct printing order
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (pid[j] > pid[j + 1]) {
+                int t;
+                t = pid[j]; pid[j] = pid[j + 1]; pid[j + 1] = t;
+                t = at[j]; at[j] = at[j + 1]; at[j + 1] = t;
+                t = bt[j]; bt[j] = bt[j + 1]; bt[j + 1] = t;
+                t = wt[j]; wt[j] = wt[j + 1]; wt[j + 1] = t;
+                t = tat[j]; tat[j] = tat[j + 1]; tat[j + 1] = t;
+            }
+        }
     }
 
     double avgWT = 0, avgTAT = 0;
